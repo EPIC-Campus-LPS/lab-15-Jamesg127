@@ -1,11 +1,11 @@
 package Seatss;
-
+import java.io.IOException;
 public class venueRunner {
 	public class Main {  
-	    public static void main(String[] args) {  
+	    public static void main(String[] args) throws IOException{  
 	        System.out.println("Create new venue with 20 rows of 50 columns with default price of 50.00.");  
-	        Venue venue = new Venue(20, 50, 50.0);  
-	  
+	        Venue venue = new Venue(20, 50, 50.00);  
+	        
 	        System.out.println("Set first 4 rows to premium with price 100.00.");  
 	        int row = 0;  
 	        while(row < 5){  

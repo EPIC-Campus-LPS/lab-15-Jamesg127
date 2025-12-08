@@ -9,9 +9,12 @@ public class Venue {
 		seatArr = s;
 		for(int i = 0; i < seatArr.length; i++) {
 			for(int j = 0; j < seatArr[i].length; j++) {
+				seatArr[i][j].setPrice(price);
+				seatArr[i][j].setSold(false);
 			}
 		}
 	}
+	
 	public boolean buyTicket(int row, int col) {
 		if (seatArr[row][col].getSold() == true) {
 			return false;
@@ -20,26 +23,26 @@ public class Venue {
 	}
 	public boolean isAvailable(int row, int col) {
 		if (seatArr[row][col].getSold() == true) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	public void setPremium(int row, double price) {
 		for(int i = 0; i < seatArr[row].length; i++) {
 			seatArr[row][i].setType("P");
-			seatArr[row][i].setPrice(seatArr[row][i].getPrice() + price);
+			seatArr[row][i].setPrice(price);
 		}
 	}
 	public void setPremium(int row, int colStart, int colEnd, double price) {
 		for(int i = colStart; i < colEnd; i++) {
 			seatArr[row][i].setType("P");
-			seatArr[row][i].setPrice(seatArr[row][i].getPrice() + price);
+			seatArr[row][i].setPrice(price);
 		}
 	}
 	public void setGA(int row, double price) {
 		for(int i = 0; i < seatArr[row].length; i++) {
 			seatArr[row][i].setType("G");
-			seatArr[row][i].setPrice(seatArr[row][i].getPrice() + price);
+			seatArr[row][i].setPrice(price);
 		}
 	}
 	public boolean importTickets(String filename) throws IOException {
@@ -54,6 +57,21 @@ public class Venue {
 		}	
 		return true;
 	}
+	public double totalRevenue()
+	{
+		int sum = 0;
+		for(int i = 0; i < seatArr.length; i++) {
+			for (int j = 0; j < seatArr[i].length; j++)
+			{
+				if (seatArr[i][j].getSold() == true)
+				{
+					sum += seatArr[i][j].getPrice();
+				}
+			}
+		}
+		
+		return sum;
+	}
 	public double totalRevenue(int col)
 	{
 		int sum = 0;
@@ -64,21 +82,6 @@ public class Venue {
 				sum += seatArr[i][col].getPrice();
 			}
 		}
-		return sum;
-	}
-	public double totalRevenue()
-	{
-		int sum = 0;
-		for(int j = 0; j < seatArr.length; j++) {
-			for (int i = 0; i < seatArr[j].length; i++)
-			{
-				if (seatArr[j][i].getSold() == true)
-				{
-					sum += seatArr[j][i].getPrice();
-				}
-			}
-		}
-		
 		return sum;
 	}
 	public int totalSold()
@@ -110,7 +113,7 @@ public class Venue {
 	}
 	public void printVenue()
 	{
-		for (int i = 0; i < Seat.length; i++)
+		for (int i = 0; i < seatArr.length; i++)
 		{
 			for (int j = 0; j < seatArr[i].length; j++)
 			{
@@ -179,14 +182,10 @@ public class Venue {
 		}
 		return false;
 	}
-	public boolean allPremium(int row)
-	{
+	public boolean allPremium(int col){
 		boolean bean = true;
-		for (int j = 0; j < seatArr[row].length; j++)
-		{
-			if (seatArr[row][j].getType().equals("G"))
-			{
-				bean = bean;
+		for (int j = 0; j < seatArr.length; j++){
+			if (seatArr[j][col].getType().equals("P")){
 			}
 			else
 			{

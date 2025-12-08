@@ -14,13 +14,13 @@ public class Seat {
 	public static double getPrice() {
 		return price;
 	}
-	public void setSold(boolean s) {
+	public static void setSold(boolean s) {
 		sold = s;
 	}
-	public void setType(String t) {
+	public static void setType(String t) {
 		type = t;
 	}
-	public void setPrice(double p) {
+	public static void setPrice(double p) {
 		price = p;
 	}
 	public Seat(boolean s, String t, double p) {
