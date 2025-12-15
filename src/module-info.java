@@ -4,5 +4,5 @@
 /**
  * 
  */
-module Seats {
+module Matrix {
 }
